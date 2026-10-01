@@ -1,0 +1,98 @@
+
+{% extends 'crisisintel/base.html' %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h1 class="mb-4">
+         Batch Tweet Prediction
+    </h1>
+
+    <div class="card shadow p-4 mb-4">
+
+        <h4 class="mb-3">
+            Upload CSV File
+        </h4>
+
+        <p>
+            CSV must contain a column named:
+            <strong>tweet</strong>
+        </p>
+
+        <form method="POST"
+              enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <input type="file"
+                   name="csv_file"
+                   class="form-control mb-3"
+                   required>
+
+            <button class="btn btn-primary">
+                Upload & Predict
+            </button>
+
+        </form>
+
+    </div>
+
+    {% if predictions %}
+
+    <div class="card shadow p-4">
+
+        <h4 class="mb-3">
+            Prediction Results
+        </h4>
+
+        <div class="table-responsive">
+
+            <table class="table table-striped">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>Tweet</th>
+                        <th>Category</th>
+                        <th>Confidence</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for p in predictions %}
+
+                    <tr>
+
+                        <td>
+                            {{ p.tweet|truncatechars:70 }}
+                        </td>
+
+                        <td>
+                            {{ p.category }}
+                        </td>
+
+                        <td>
+                            {{ p.confidence }}%
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
+
