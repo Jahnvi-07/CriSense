@@ -116,7 +116,7 @@ CriSense/
 
 ## Step 1: Clone Repository
 
-git clone https://github.com/rajpratapsinghsisodiya75-alt/CriSense.git
+git clone git clone https://github.com/Jahnvi-07/CriSense.git
 
 cd CriSense
 
